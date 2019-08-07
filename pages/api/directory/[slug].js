@@ -1,22 +1,18 @@
+const sql = require('sql-template-strings')
+const { query } = require('../../../lib/db')
+
 export default async (req, res) => {
-  const directoryBySlug = {
-    sidigital: {
-      name: 'Si digital',
-      slug: 'sidigital'
-    },
-    'strong-island': {
-      name: 'Strong Island',
-      slug: 'strong-island'
-    }
+  const results = await query(sql`
+    SELECT * FROM org WHERE slug = ${req.query.slug}
+  `)
+
+  //If there is an error executing the sql statement it will stop the program
+  if (results.error) {
+    throw results.error;
   }
 
-  // If the requested entry doesn't exist...
-  if (typeof directoryBySlug[req.query.slug] === 'undefined') {
-    // Set the response status to 404 and send an empty obejct.
-    res.status(404).json({})
-    // Return early to stop any code below executing.
-    return
-  }
-
-  res.json(directoryBySlug[req.query.slug])
+  //Returns the results of the sql query
+  res.json(
+    results
+  )
 }

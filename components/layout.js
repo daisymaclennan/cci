@@ -18,6 +18,7 @@ const Layout = ({ children }) => (
       </Link>
     </Logo>
     {children}
+    <footer>&copy; CCI</footer>
   </div>
 )
 

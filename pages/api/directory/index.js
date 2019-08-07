@@ -3,21 +3,16 @@ const { query } = require('../../../lib/db')
 
 export default async (req, res) => {
   const results = await query(sql`
-    SELECT
-      *
-    FROM
-      directory
+    SELECT * FROM org
   `)
 
-  // Return a list of entries.
-  res.json([
-    {
-      name: 'Si digital',
-      slug: 'sidigital'
-    },
-    {
-      name: 'Strong Island',
-      slug: 'strong-island'
-    }
-  ])
+  //If there is an error executing the sql statement it will stop the program
+  if (results.error) {
+    throw results.error;
+  }
+
+  //Returns the results of the sql query
+  res.json(
+    results
+  )
 }

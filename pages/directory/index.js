@@ -6,10 +6,11 @@ import Layout from '../../components/layout'
 const Page = ({ directory }) => (
   <Layout>
     <h2>Directory</h2>
+
     <ul>
       {directory.map(entry => (
-        <li key={entry.slug}>
-          <Link href='/directory/[slug]' as={`/directory/${entry.slug}`}>
+        <li key={entry.name}>
+          <Link href='/directory/[slug]' as={`/directory/${entry.name}`}>
             <a>{entry.name}</a>
           </Link>
         </li>
