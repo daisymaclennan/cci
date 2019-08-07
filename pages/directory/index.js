@@ -6,21 +6,20 @@ import Layout from '../../components/layout'
 const Page = ({ directory }) => (
   <Layout>
     <h2>Directory</h2>
-
-    <ul>
-      {directory.map(entry => (
-        <li key={entry.name}>
-          <Link href='/directory/[slug]' as={`/directory/${entry.name}`}>
-            <a>{entry.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+    {directory.map( direct => (
+      <Link href="/directory/[slug]" as={`/directory/${direct.slug}`}>
+        <a>
+          <h3>{direct.name}</h3>
+        </a>
+      </Link>
+    ))}
+    </div>
   </Layout>
 )
 
 Page.getInitialProps = async (req) => {
-  const directory = await api('directory')
+  const directory = await api('org')
 
   return {
     directory: directory.json

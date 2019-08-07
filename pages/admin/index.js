@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const Page = () => (
   <Layout>
-    <p>Sed risus adipiscing hendrerit in vestibulum sed aenean, sodales vivamus est risus aenean vestibulum. Lorem ut sollicitudin sapien in vestibulum ut suscipit amet porttitor. Vestibulum ipsum in sapien est consectetur ante. Nunc condimentum vivamus aenean ante risus condimentum euismod, ipsum, faucibus ante in adipiscing lorem.</p>
+    <h1>Admin</h1>
     <Link href='/admin/users'>
       <a>Users</a>
     </Link>
@@ -15,19 +15,10 @@ const Page = () => (
       <a>Blog</a>
     </Link>
     <br/>
-    <Link href='/admin/notifications'>
-      <a>Notifications</a>
+    <Link href='/admin/directory'>
+      <a>Directory</a>
     </Link>
   </Layout>
 )
-
-//Function to be added which will wait for info fom the server
-/*Page.getInitialProps = async (req) => {
-  const access = await api('admin')
-
-  return {
-    access: access.json
-  }
-}*/
 
 export default Page
