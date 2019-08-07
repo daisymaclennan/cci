@@ -1,6 +1,7 @@
 import React from 'react'
-import { Formik, Form, Field, FieldArray } from 'formik';
-import api from '../lib/api'
+import { Formik, Form, Field, FieldArray } from 'formik'
+import api from '../../lib/api'
+import Router from 'next/router'
 
 const Page = () => (
   <div>
@@ -15,6 +16,9 @@ const Page = () => (
                 "content-type": "application/json"
               }
             })
+            if(login.res.ok){
+              Router.push('/admin')
+            }
           }
           }
           render={({ values, handleSubmit }) => (

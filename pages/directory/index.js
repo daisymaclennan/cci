@@ -23,7 +23,7 @@ Page.getInitialProps = async (req) => {
   const directory = await api('directory')
 
   return {
-    directory: directory
+    directory: directory.json
   }
 }
 

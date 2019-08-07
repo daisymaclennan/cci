@@ -21,4 +21,13 @@ const Page = () => (
   </Layout>
 )
 
+//Function to be added which will wait for info fom the server
+/*Page.getInitialProps = async (req) => {
+  const access = await api('admin')
+
+  return {
+    access: access.json
+  }
+}*/
+
 export default Page

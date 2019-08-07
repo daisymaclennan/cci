@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Form, Field, FieldArray } from 'formik';
-import api from '../../lib/api'
+import api from '../../../lib/api'
 
 const Page = () => (
   <div>
@@ -8,7 +8,7 @@ const Page = () => (
     <Formik
           initialValues={{email_address : '', password: ''}}
           onSubmit={async values => {
-            const register = await api('add-user', {
+            const register = await api('admin/users/add-user', {
               method: 'POST',
               body: JSON.stringify(values),
               headers: {

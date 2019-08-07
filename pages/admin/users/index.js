@@ -1,11 +1,11 @@
 import React from 'react'
 import { Formik, Form, Field, FieldArray } from 'formik';
-import api from '../../lib/api'
+import api from '../../../lib/api'
 
 const Page = ({users}) => (
   <div>
     <h2>Users</h2>
-    <a href="/admin/add-user">Add new user</a>
+    <a href="/admin/users/add">Add new user</a>
     {users.map(user => (
     <ul>
       <li key={user.full_name}>
@@ -24,10 +24,10 @@ const Page = ({users}) => (
 )
 
 Page.getInitialProps = async (req) => {
-  const users = await api('users')
+  const users = await api('admin/users')
 
   return {
-    users: users
+    users: users.json
   }
 }
 

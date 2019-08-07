@@ -5,7 +5,7 @@ import api from '../../lib/api'
 
 const Page = ({ entry }) => (
   <Layout>
-    <h2>{entry.name}</h2>
+    <pre>{entry}</pre>
   </Layout>
 )
 
@@ -13,7 +13,7 @@ Page.getInitialProps = async ({ query }) => {
   const entry = await api(`directory/${query.slug}`)
 
   return {
-    entry: entry
+    entry: entry.json
   }
 }
 

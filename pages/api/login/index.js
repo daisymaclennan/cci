@@ -3,6 +3,7 @@ const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 import { sign } from 'jsonwebtoken'
+import Cookies from  'js-cookie'
 
 
 export default async (req, res) => {
@@ -33,9 +34,13 @@ export default async (req, res) => {
     //Generates a json web token to be used a user authorisation
     var jwt = require('jsonwebtoken');
     var token = jwt.sign('267', process.env.JWT_SECRET);
+
     //Sets the user cookie to equal the value of their access token
-    cookies.set('user', token, {path : '/'});
+    Cookies.set('user', token);
+
+    res.json({})
   }else{
     console.log("wrong password");
+    res.status(401).json({});
   }
 }
