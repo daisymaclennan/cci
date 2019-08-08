@@ -10,7 +10,7 @@ const Page = ({ user }) => (
     <Formik
           initialValues={{full_name : user.full_name, username: user.username, email_address: user.email_address}}
           onSubmit={async values => {
-            const register = await api(`users/${query.slug}`, {
+            const register = await api(`users/${user.slug}`, {
               method: 'PATCH',
               body: JSON.stringify(values),
               headers: {

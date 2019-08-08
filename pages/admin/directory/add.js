@@ -22,35 +22,35 @@ const Page = () => (
               handleSubmit
             }>
               <div>
-                <label for="name">Name:</label>
+                <label htmlFor="name">Name:</label>
                 <Field type="text" name="name"/>
               </div>
               <div>
-                <label for="address">Address:</label>
+                <label htmlFor="address">Address:</label>
                 <Field type="text" name="address"/>
               </div>
               <div>
-                <label for="postcode">Postcode:</label>
+                <label htmlFor="postcode">Postcode:</label>
                 <Field type="text" name="postcode"/>
               </div>
               <div>
-                <label for="owner">Owner(s):</label>
+                <label htmlFor="owner">Owner(s):</label>
                 <Field type="text" name="owner"/>
               </div>
               <div>
-                <label for="description">Description:</label>
+                <label htmlFor="description">Description:</label>
                 <Field type="text" name="description"/>
               </div>
               <div>
-                <label for="feat_img">Featured image:</label>
+                <label htmlFor="feat_img">Featured image:</label>
                 <Field type="file" name="feat_img"/>
               </div>
               <div>
-                <label for="phone_num">Phone number:</label>
+                <label htmlFor="phone_num">Phone number:</label>
                 <Field type="text" name="phone_num"/>
               </div>
               <div>
-                <label for="website">Website:</label>
+                <label htmlFor="website">Website:</label>
                 <Field type="text" name="website"/>
               </div>
               <button type="submit">Add</button>

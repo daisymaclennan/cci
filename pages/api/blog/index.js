@@ -18,12 +18,12 @@ export default async (req, res) => {
   //Sends data to the server
   if(req.method === 'POST'){
     //Makes a URL friendly slug
-    var slugName = slug(req.body.name)
+    var slugName = slug(req.body.title)
     slugName = slugName.toLowerCase();
 
     //Checks if there is an organisation with the same slugName
     const exists = await query(sql`
-      SELECT id FROM org WHERE slug = ${slugName}
+      SELECT id FROM posts WHERE slug = ${slugName}
     `)
 
     if(exists.length > 0){
@@ -36,18 +36,18 @@ export default async (req, res) => {
 
     if(exists.error) {
       throw exists.error;
-    }else{
-      var today = new Date();
-      var publish_date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-      //Need to add featured image handling
+    }
+    var isToday = require('date-fns/is_today')
+    console.log(isToday(new Date()))
 
-      //Need to insert the file path for the featured image into the database
-      const results = await query(sql`
-        INSERT INTO posts (title, excerpt, author_id, publish_date, is_published, slug, content) VALUES ( ${req.body.title}, ${req.body.excerpt}, ${req.body.feat_image}, ${author_id}, ${publish_date}, ${req.body.is_published}, ${req.body.slug}, ${req.body.content})
-      `)
-      if(results.error){
-        throw results.error;
-      }
+    //Need to find a way to get hold of values which are not available yet. Have been filled with strings instead of the variable
+
+    const results = await query(sql`
+      INSERT INTO posts (title, excerpt, feat_img, author_id, publish_date, is_published, slug, content, category_id)
+      VALUES (${req.body.title}, "We’re a blend of the curious, the technical and the creative. A talented group which is more than the sum of its parts. We create digital chemistry.", "/uploads/feat_img", 10, '2019-08-09 15:32:00', ${req.body.is_published}, ${slugName}, "We’re a blend of the curious, the technical and the creative. A talented group which is more than the sum of its parts. We create digital chemistry...", 2)
+    `)
+    if(results.error){
+      throw results.error;
     }
   }
 }

@@ -7,8 +7,10 @@ const saltRounds = 10;
 export default async (req, res) => {
   //Update request
   if(req.method === 'PATCH'){
-    var slugName = slug(req.body.name)
+    var slugName = slug(req.query.name)
     slugName = slugName.toLowerCase();
+
+    console.log(req.query.email_address)
 
     //Need to add featured image updating
     const results = await query(sql`
@@ -20,7 +22,7 @@ export default async (req, res) => {
     }
 
     const updatedOrg = await query(sql`
-      SELECT * FROM org WHERE slug = ${req.query.slug}
+      SELECT * FROM users WHERE slug = ${req.query.slug}
     `)
 
     res.json(updatedOrg[0])

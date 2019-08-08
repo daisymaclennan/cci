@@ -6,6 +6,7 @@ import Link from 'next/link'
 const Page = ({orgs}) => (
   <div>
     <h2>Directory</h2>
+    <a href="/admin/directory/categories">View categories</a>
     <a href="/admin/directory/add">Add new organisation</a>
     <ul>
       {orgs.map(org => (
