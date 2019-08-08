@@ -57,6 +57,27 @@ const Page = () => (
             </form>
           )}
         />
+        <Formik
+              initialValues={{email_address : '', password: ''}}
+              onSubmit={async values => {
+                console.log('file', values.upload)
+                const data = new FormData()
+                data.append('files', values.upload)
+                const register = await api('uploads', {
+                  method: 'POST',
+                  body: data
+                })
+              }
+              }
+              render={({ values, handleSubmit }) => (
+                <form onSubmit={
+                  handleSubmit
+                }>
+                  <Field type="file" name="upload"/>
+                  <button type="submit">Add</button>
+                </form>
+              )}
+            />
       </div>
 )
 
