@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Logo = styled.h1`
+const Header = styled.h1`
   @media screen and (max-width: 1000px){
     svg{
       height: 24px;
@@ -13,4 +13,4 @@ const Logo = styled.h1`
 `
 
 
-export default Logo
+export default Header

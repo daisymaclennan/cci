@@ -3,13 +3,14 @@ import { Formik, Form, Field, FieldArray } from 'formik'
 import api from '../../lib/api'
 import Router from 'next/router'
 
+
 const Page = () => (
   <div>
     <h1>Log in</h1>
     <Formik
           initialValues={{email_address : '', password: ''}}
           onSubmit={async values => {
-            const login = await api('login', {
+            const login = await api(`login`, {
               method: 'POST',
               body: JSON.stringify(values),
               headers: {

@@ -3,6 +3,7 @@ import slug from 'slug'
 const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+//require('../verify.js')
 
 export default async (req, res) => {
   //Gets all Users

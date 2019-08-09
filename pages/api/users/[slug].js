@@ -4,6 +4,7 @@ const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
 export default async (req, res) => {
   //Update request
   if(req.method === 'PATCH'){
