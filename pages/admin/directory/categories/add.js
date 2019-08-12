@@ -25,13 +25,16 @@ const Page = ( {cats} ) => (
                 <label htmlFor="category_name">Category Name:</label>
                 <Field type="text" name="category_name"/>
               </div>
-              <Field component="select" name="parent_category">
-              {cats.map(cat => (
-                <option value={cat.category_id} key={cat.category_name}>
-                    {cat.category_name}
-                </option>
-              ))}
-              </Field>
+              <div>
+                <label htmlFor="parent_category">Parent category:</label>
+                <Field component="select" name="parent_category">
+                {cats.map(cat => (
+                  <option value={cat.category_id} key={cat.category_name}>
+                      {cat.category_name}
+                  </option>
+                ))}
+                </Field>
+              </div>
               <button type="submit">Add Category</button>
             </form>
           )}

@@ -23,8 +23,11 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
+    var slugName = slug(req.body.category_name)
+    slugName = slugName.toLowerCase();
+
     const results = await query(sql`
-      INSERT INTO org_categories (category_name, parent_category_id) VALUES (${req.body.category_name}, ${req.body.parent_category})
+      INSERT INTO org_categories (category_name, parent_category_id, slug) VALUES (${req.body.category_name}, ${req.body.parent_category}, ${slugName})
       `)
 
     if(results.error){

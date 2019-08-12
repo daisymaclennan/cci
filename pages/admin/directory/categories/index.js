@@ -6,7 +6,7 @@ import Link from 'next/link'
 const Page = ({cats}) => (
   <div>
     <h2>Directory categories</h2>
-    <a href="/admin/directory/categori/add">Add new category</a>
+    <a href="/admin/directory/categories/add">Add new category</a>
     <ul>
       {cats.map(cat => (
         <li>{cat.category_name}</li>

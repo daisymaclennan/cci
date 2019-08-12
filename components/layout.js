@@ -6,9 +6,33 @@ import Content from './content'
 import NavBar from './nav-bar'
 
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Blinker';
+    src: url('../static/fonts/blinker/Blinker-Regular.ttf');
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: 'Blinker';
+    src: url('../static/fonts/blinker/Blinker-Semi-Bold.ttf');
+    font-weight: semi-bold;
+  }
   body {
     background-color: #FFFFFF;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Blinker', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  h2{
+    font-weight: 600;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 29px;
+  }
+  h3{
+    font-size: 14px;
+  }
+  a{
+    text-decoration: none;
+    color: inherit;
   }
 `
 
