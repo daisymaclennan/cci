@@ -34,6 +34,10 @@ const Page = () => (
                 <Field type="text" name="postcode"/>
               </div>
               <div>
+                <label htmlFor="email_address">Email address:</label>
+                <Field type="email" name="email_address"/>
+              </div>
+              <div>
                 <label htmlFor="owner">Owner(s):</label>
                 <Field type="text" name="owner"/>
               </div>

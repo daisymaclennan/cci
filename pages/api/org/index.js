@@ -49,7 +49,7 @@ export default async (req, res) => {
 
       //Need to insert the file path for the featured image into the database
       const results = await query(sql`
-        INSERT INTO org (name, address, postcode, owner, descr, phone_num, website, slug) VALUES ( ${req.body.name}, ${req.body.address}, ${req.body.postcode}, ${req.body.owner}, ${req.body.desc}, ${req.body.phone_num}, ${req.body.website}, ${slugName})
+        INSERT INTO org (name, address, postcode, owner, descr, phone_num, website, slug, email_address) VALUES ( ${req.body.name}, ${req.body.address}, ${req.body.postcode}, ${req.body.owner}, ${req.body.desc}, ${req.body.phone_num}, ${req.body.website}, ${slugName}, ${req.body.email_address})
       `)
       if(results.error){
         throw results.error;

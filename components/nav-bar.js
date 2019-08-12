@@ -1,69 +1,38 @@
 import styled from 'styled-components'
 
-const NavBar = styled.nav`
+const NavBar = styled.div`
+  width: 100vw;
+  height: 60px;
+  top: 0;
+  left: 0;
   position: absolute;
-  box-shadow: 0px -4px 8px rgba(29, 29, 29, 0.1);
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  z-index: 10;
-  div{
-    display: flex;
-    justify-content: space-between;
-    width: 320px;
-    height: 50px;
-  }
-  a{
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #52565F;
-    text-decoration: none;
-    height: 50px;
-
-    position: relative;
-    display: flex;
-
-  }
-  svg{
-    display: block;
-    margin-left: auto;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  .logo{
     margin-right: auto;
-    height: 16px;
-    fill: #52565F;
   }
-  h3{
-    text-align: center;
-    display: block;
-    margin-bottom: 0;
-    letter-spacing: 0.15em;
-  }
-  @media screen and (max-width: 999px){
-    bottom: 0;
-    left: 0;
-    height: 80px;
-    width: 100vw;
-
-    a{
-      flex-direction: column;
+  @media screen and (max-width: 1000px){
+    .logo{
+      margin-left: 10px;
+    }
+    .elipsis{
+      margin-right: 10px;
+    }
+    .search{
+      margin-right: 20px;
     }
   }
   @media screen and (min-width: 1000px){
-    top: 0;
-    left: 0;
-    height: 60px;
-    width: 100vw;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
-    a{
-      justify-content: space-around;
+    .logo{
+      margin-right: 5px;
+      width: 34px;
     }
-    svg{
-      margin-top: auto;
-      margin-bottom: auto;
-      margin-right: 15px;
+    .elipsis{
+      margin-right: 50px;
     }
-    h3{
-      margin-top: auto;
-      margin-bottom: auto;
+    .search{
+      margin-right: 5px;
     }
   }
 

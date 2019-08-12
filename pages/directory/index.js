@@ -5,11 +5,18 @@ import Layout from '../../components/layout'
 import TitleBox from '../../components/title-box'
 import OrgCat from '../../components/org-cat'
 import {useRouter} from 'next/router'
+import CompBox from '../../components/comp-box'
+import { Formik, Form, Field, FieldArray } from 'formik';
+import FilterBox from '../../components/filter-box'
+import Filters from '../../components/filters'
 
-const Page = ({ categories }) => {
+const Page = ({ categories, orgs }) => {
   const router = useRouter();
+
+  console.log('GETTING CATEGORY TOP LEVEL', router.query.cat)
+
   if(router.query.cat){
-    return(<CatPage></CatPage>)
+    return(<CatPage categories={categories} orgs={orgs}></CatPage>)
   }
   return(
     <Layout>
@@ -35,20 +42,65 @@ const Page = ({ categories }) => {
   )
 }
 
-const CatPage = ({ categories }) => (
-  <div>
-    <h2>next page</h2>
-    <pre>
-      {category}
-    </pre>
-  </div>
-)
+const CatPage = ({ categories, orgs }) => {
+  const router = useRouter();
+  console.log('GETTING CATEGORY', router.query.cat)
+
+  const category = categories.find(category => {
+    return category.slug === router.query.cat
+  })
+
+  /* if (!category) {
+    return <p>Category not found</p>
+  } */
+
+  console.log("category", category)
+
+  console.log(categories)
+
+  const sub_categories = categories.filter( sub_category => {
+    console.log('testing category', sub_category.category_name, 'with parent id', sub_category.parent_category_id, 'against category', category.category_id)
+    return sub_category.parent_category_id == category.category_id
+  })
+
+  return(
+    <Layout>
+      <h2>{category.category_name}</h2>
+      <Filters>
+        <Formik
+          render={() => (
+            <>
+              {sub_categories.map( sub_cat => (
+                <FilterBox>
+                  <label htmlFor="filter">{sub_cat.category_name}</label>
+                  <Field type="checkbox" name="filter" value={sub_cat.slug} />
+                </FilterBox>
+              ))}
+            </>
+          )}
+        />
+      </Filters>
+      <div>
+        {orgs.map( org => (
+          <Link href="/directory/[slug]" as={`/directory/${org.slug}`}>
+            <CompBox>
+              <h3>{org.name}</h3>
+              <p>{org.descr}</p>
+            </CompBox>
+          </Link>
+        ))}
+      </div>
+    </Layout>
+  )
+}
 
 Page.getInitialProps = async (req) => {
   const categories = await api('org/categories')
+  const orgs = await api('org')
 
   return {
-    categories: categories.json
+    categories: categories.json,
+    orgs: orgs.json
   }
 }
 
