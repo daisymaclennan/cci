@@ -9,11 +9,8 @@ const OrgCat = styled.ul`
       align-items: center;
     }
     h3{
-      text-transform: uppercase;
-      font-weight: 600;
-      line-height: 17px;
       letter-spacing: 0.15em;
-      margin-left: 10px;--
+      margin-left: 10px;
     }
     svg{
       margin-left: auto;

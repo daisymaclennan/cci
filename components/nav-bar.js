@@ -9,10 +9,12 @@ const NavBar = styled.div`
   display: flex;
   align-items: center;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  z-index: 1;
   .logo{
     margin-right: auto;
   }
-  @media screen and (max-width: 1000px){
+  @media screen and (max-width: 999px){
     .logo{
       margin-left: 10px;
     }
@@ -25,18 +27,16 @@ const NavBar = styled.div`
   }
   @media screen and (min-width: 1000px){
     .logo{
-      margin-right: 5px;
-      width: 34px;
+      margin-left: 50px;
     }
     .elipsis{
       margin-right: 50px;
     }
     .search{
-      margin-right: 5px;
+      margin-right: 20px;
     }
   }
 
 `
-
 
 export default NavBar
