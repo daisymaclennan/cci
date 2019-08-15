@@ -12,6 +12,7 @@ const FilterBox = styled.div`
     font-size: 14px;
     line-height: 17px;
     color: #4A4949;
+    transition: 0.25s ease-in-out;
   }
   input[type="checkbox"]{
     border: 0;
@@ -22,6 +23,10 @@ const FilterBox = styled.div`
     padding: 0;
     position: absolute;
     width: 1px;
+  }
+  input[type="checkbox"]:checked ~ label{
+    background: #0D87FF;
+    color: #FFFFFF;
   }
 
 `
