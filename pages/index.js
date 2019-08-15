@@ -4,12 +4,19 @@ import Layout from '../components/layout'
 import DiscoverOverlay from '../components/discover-overlay'
 import api from '../lib/api'
 import { useState } from 'react'
+import SecondaryButton from '../components/secondary-button'
 
 
 const Page = ({ categories }) => {
   const [ discoverOpen, setDiscoverOpen ] = useState(false)
   return(
     <Layout>
+      <SecondaryButton href="/directory">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="6" r="5.5" stroke="#52565F"/>
+        </svg>
+        View map as list
+      </SecondaryButton>
       <DiscoverOverlay className={discoverOpen ? 'show' : 'hidden'}>
         <button className="not-style-button open-button" onClick={() => setDiscoverOpen(!discoverOpen)}>
           <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">

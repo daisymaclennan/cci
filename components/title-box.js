@@ -4,7 +4,10 @@ const TitleBox = styled.div`
     h2{
       text-transform: uppercase;
     }
-    //Add more styles once design is more clear
+    @media screen and (max-width: 999px){
+      margin-top: 140px;
+      margin-bottom: 35px;
+    }
   }
 
 `

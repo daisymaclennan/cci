@@ -11,15 +11,15 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Blinker';
     src: url('../static/fonts/blinker/Blinker-Regular.ttf');
-    font-weight: normal;
+    font-weight: 400;
   }
   @font-face {
     font-family: 'Blinker';
     src: url('../static/fonts/blinker/Blinker-SemiBold.ttf');
-    font-weight: semi-bold;
+    font-weight: 600;
   }
   body {
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     font-family: 'Blinker', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   h2{
@@ -43,10 +43,21 @@ const GlobalStyle = createGlobalStyle`
     line-height: 17px;
   }
   h5{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  h6{
     font-size: 10px;
     line-height: 12px;
     color: #4A4949;
     font-weight: normal;
+  }
+  p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #52565F;
   }
   a{
     text-decoration: none;
@@ -64,6 +75,7 @@ const GlobalStyle = createGlobalStyle`
     outline: 0;
   }
 
+
   /*Discover overlay styles*/
   .hidden{
     top: calc(100% - 90px);
@@ -74,6 +86,13 @@ const GlobalStyle = createGlobalStyle`
 
   .hidden > button{
     transform: rotate(180deg);
+  }
+
+  /*Org slug styles*/
+  .org__sub-title{
+    line-height: 24px;
+    letter-spacing: 0.15em;
+    margin-top: 40px;
   }
 
   @media screen and (max-width: 999px){

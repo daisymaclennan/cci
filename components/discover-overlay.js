@@ -5,7 +5,7 @@ const DiscoverOverlay = styled.div`
     border-radius: 20px;
     position: fixed;
     height: 600px;
-    transition: 2s ease-in-out;
+    transition: top 2s ease-in-out;
     .open-button{
       background: #0D87FF;
       height: 40px;
@@ -15,7 +15,7 @@ const DiscoverOverlay = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: 2s ease-in-out; 
+      transition: 2s ease-in-out;
       position: absolute;
       top: -20px;
       left: calc(50% - 20px);

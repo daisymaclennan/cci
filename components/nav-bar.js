@@ -13,6 +13,7 @@ const NavBar = styled.div`
   z-index: 1;
   .logo{
     margin-right: auto;
+    cursor: pointer;
   }
   @media screen and (max-width: 999px){
     .logo{

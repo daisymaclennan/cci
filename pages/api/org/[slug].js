@@ -23,11 +23,22 @@ export default async (req, res) => {
     const results = await query(sql`
       SELECT * FROM org WHERE slug = ${req.query.slug}
       `)
+
     if(results.error){
       throw results.error;
-    }else{
-      res.json(results[0])
     }
+
+    const images = await query(sql`
+      SELECT * FROM org_images WHERE org_id = ${results[0].id}
+      `)
+
+    if(images.error){
+      throw images.error
+    }
+
+    results[0].images = images
+
+    res.json(results[0])
     return
   }
 
