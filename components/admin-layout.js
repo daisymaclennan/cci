@@ -7,130 +7,20 @@ import { useState } from 'react'
 import SearchOverlay from './search-overlay'
 import MoreOverlay from './more-overlay'
 import AdminSideBar from './admin-side-bar'
-
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Blinker';
-    src: url('../static/fonts/blinker/Blinker-Regular.ttf');
-    font-weight: 400;
-  }
-  @font-face {
-    font-family: 'Blinker';
-    src: url('../static/fonts/blinker/Blinker-SemiBold.ttf');
-    font-weight: 600;
-  }
-  body {
-    background-color: #FFFFFF;
-    font-family: 'Blinker', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
-  h2{
-    font-weight: 600;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    line-height: 29px;
-    color: #1D1D1D;
-  }
-  h3{
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    text-transform: uppercase;
-    color: #1D1D1D;
-  }
-  h4{
-    font-size: 14px;
-    color: #52565F;
-    line-height: 17px;
-  }
-  h5{
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 14px;
-  }
-  h6{
-    font-size: 10px;
-    line-height: 12px;
-    color: #4A4949;
-    font-weight: normal;
-  }
-  p{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    color: #52565F;
-  }
-  a{
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-  }
-  button{
-    cursor: pointer;
-  }
-  .no-style-button{
-    border: 0;
-    background-color: #FFFFFF;
-  }
-  *:focus{
-    outline: 0;
-  }
-
-
-  /*Discover overlay styles*/
-  .hidden{
-    top: calc(100% - 90px);
-  }
-  .show{
-    top: calc(100% - 600px);
-  }
-
-  .hidden > button{
-    transform: rotate(180deg);
-  }
-
-  /*Org slug styles*/
-  .org__sub-title{
-    line-height: 24px;
-    letter-spacing: 0.15em;
-    margin-top: 40px;
-  }
-
-  @media screen and (max-width: 999px){
-    .search-blip{
-      position: absolute;
-      right: 48px;
-      bottom: 0;
-    }
-    .more-blip{
-      position: absolute;
-      right: 4px;
-      bottom: 0;
-    }
-  }
-  @media screen and (min-width: 1000px){
-    .search-blip{
-      position: absolute;
-      right: 58px;
-      bottom: 0;
-    }
-    .more-blip{
-      position: absolute;
-      right: 13px;
-      bottom: 0;
-    }
-    body{
-      background-color: #F9F9F9;
-    }
-  }
-`
+import GlobalLayout from './global-layout'
+import Router from 'next/router'
+import { useCookies } from 'react-cookie'
 
 const AdminLayout = ({ children }) => {
 const [ searchOpen, setSearchOpen ] = useState(false)
 const [ moreOpen, setMoreOpen ] = useState(false)
+const [ cookies ] = useCookies([ 'user' ]);
+const { user } = cookies
+if(!user && process.browser){
+  Router.push('/login')
+}
 return(
-  <div>
-    <GlobalStyle />
+  <GlobalLayout>
     <NavBar>
       <Link href='/'>
         <svg className="logo" width="112" height="24" viewBox="0 0 112 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -230,7 +120,7 @@ return(
     <Content>
       {children}
     </Content>
-  </div>
+  </GlobalLayout>
 )}
 
 export default AdminLayout

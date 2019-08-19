@@ -1,10 +1,14 @@
 const sql = require('sql-template-strings')
 import slug from 'slug'
 const { query } = require('../../../lib/db')
+import apiAuth from '../../../lib/api-auth'
 
 export default async (req, res) => {
   //Update request
   if(req.method === 'PATCH'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     var slugName = slug(req.body.name)
     slugName = slugName.toLowerCase();
 
@@ -18,7 +22,7 @@ export default async (req, res) => {
     }
   }
 
-  //Gets all Users
+  //Gets all Organisations
   if(req.method === 'GET'){
     const results = await query(sql`
       SELECT * FROM org WHERE slug = ${req.query.slug}

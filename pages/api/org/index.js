@@ -1,9 +1,10 @@
 const sql = require('sql-template-strings')
 import slug from 'slug'
 const { query } = require('../../../lib/db')
+import apiAuth from '../../../lib/api-auth'
 
 export default async (req, res) => {
-  //Gets all Users
+  //Gets all organisations
   if(req.method === 'GET'){
     const results = await query(sql`
       SELECT * FROM org
@@ -19,6 +20,9 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     //Throws an error if the request method is not POST
     if (req.method !== 'POST') {
       res.status(405).json({});

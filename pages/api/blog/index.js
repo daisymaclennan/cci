@@ -1,6 +1,7 @@
 const sql = require('sql-template-strings')
 import slug from 'slug'
 const { query } = require('../../../lib/db')
+import apiAuth from '../../../lib/api-auth'
 
 export default async (req, res) => {
   //Gets all Users
@@ -17,6 +18,9 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     //Makes a URL friendly slug
     var slugName = slug(req.body.title)
     slugName = slugName.toLowerCase();

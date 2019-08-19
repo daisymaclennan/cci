@@ -3,7 +3,6 @@ const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 import { sign } from 'jsonwebtoken'
-import Cookies from  'js-cookie'
 
 export default async (req, res) => {
   if (req.method !== 'POST') {
@@ -13,7 +12,7 @@ export default async (req, res) => {
 
   //Selects the password where the email_address field is equal to the users entered email address
   const results = await query(sql`
-    SELECT id, password FROM users WHERE email_address = ${req.body.email_address}
+    SELECT user_id, password FROM users WHERE email_address = ${req.body.email_address}
   `)
 
   //Throws an error if their is an issue with executing the sql statement
@@ -35,9 +34,10 @@ export default async (req, res) => {
     var token = jwt.sign(results[0].user_id, process.env.JWT_SECRET);
 
     //Sets the user cookie to equal the value of their access token
-    Cookies.set('user', token, { domain: 'localhost:3000'});
 
-    res.json({})
+    res.json({
+      token
+    })
   }else{
     console.log("wrong password");
     res.status(401).json({});

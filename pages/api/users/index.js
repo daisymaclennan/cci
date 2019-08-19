@@ -3,11 +3,17 @@ import slug from 'slug'
 const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+var jwt = require('jsonwebtoken');
+import apiAuth from '../../../lib/api-auth'
+
 //require('../verify.js')
 
 export default async (req, res) => {
   //Gets all Users
   if(req.method === 'GET'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     const results = await query(sql`
       SELECT * FROM users
     `)
@@ -25,6 +31,9 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     const exists = await query(sql`
       SELECT user_id FROM users WHERE username = ${req.body.email_address} OR email_address = ${req.body.email_address}
     `)
@@ -46,6 +55,8 @@ export default async (req, res) => {
       if(results.error){
         throw results.error;
       }
+
+      res.json({})
     }
   }
 }

@@ -3,11 +3,14 @@ import slug from 'slug'
 const { query } = require('../../../lib/db')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
+import apiAuth from '../../../lib/api-auth'
 
 export default async (req, res) => {
   //Update request
   if(req.method === 'PATCH'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     var slugName = slug(req.query.name)
     slugName = slugName.toLowerCase();
 
@@ -33,6 +36,9 @@ export default async (req, res) => {
 
   //Gets all Users
   if(req.method === 'GET'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     const results = await query(sql`
       SELECT * FROM users WHERE slug = ${req.query.slug}
     `)
@@ -50,6 +56,9 @@ export default async (req, res) => {
 
   //Deletes the data
   if(req.method === 'DELETE'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     const results = await query(sql`
       DELETE * FROM users WHERE slug = ${req.query.slug}
     `)

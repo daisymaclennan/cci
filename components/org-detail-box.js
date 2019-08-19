@@ -4,7 +4,7 @@ const OrgDetailBox = styled.div`
     background: #F4F4F4;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: calc(45% -5px) calc(45% -5px);
+    grid-template-columns: 45% 45%;
     grid-column-gap: 10%;
     grid-template-rows: 1fr 1fr 1fr;
 
@@ -21,9 +21,6 @@ const OrgDetailBox = styled.div`
       align-items: center;
       margin-bottom: auto;
     }
-    p{
-      border-bottom: 1px solid #0D87FF;
-    }
     .email{
       grid-row-start: 3;
       grid-row-end: 4;
@@ -34,9 +31,22 @@ const OrgDetailBox = styled.div`
       grid-column-start: 2;
       grid-column-end: 3;
       margin-bottom: auto;
+      position: relative;
+      padding-left: 20px;
     }
-
-
+    .underline{
+      display: inline;
+      box-decoration-break: clone;
+      background-repeat: no-repeat;
+      background-image: linear-gradient(180deg, #0D87FF, #0D87FF);
+      background-position-y: 100%;
+      background-size: 100% 1px;
+    }
+    .icon--address{
+      position: absolute;
+      top: 20px;
+      left: 0;
+    }
   }
 
 `

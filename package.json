@@ -12,6 +12,7 @@
   "author": "Daisy",
   "license": "ISC",
   "dependencies": {
+    "@devhammed/use-cookie": "^1.0.3",
     "@editorjs/header": "^2.3.0",
     "@editorjs/image": "^2.3.1",
     "@stfy/react-editor.js": "^0.1.5",
@@ -26,13 +27,15 @@
     "jsonwebtoken": "^8.5.1",
     "micro-upload": "^1.0.1",
     "next": "^9.0.3",
+    "react-cookie": "^4.0.1",
     "react-dom": "^16.8.6",
     "react-popper": "^1.3.3",
     "react-siema": "^1.0.1",
     "serverless-mysql": "^1.5.0",
     "slug": "^1.1.0",
     "sql-template-strings": "^2.2.2",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "use-cookie": "^0.1.1"
   },
   "devDependencies": {
     "@editorjs/editorjs": "^2.15.0",

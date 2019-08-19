@@ -1,13 +1,14 @@
 const sql = require('sql-template-strings')
 import slug from 'slug'
 const { query } = require('../../../lib/db')
+import apiAuth from '../../../lib/api-auth'
 
 export default async (req, res) => {
   //Updates the database
   /*if(req.method === 'PATCH'){
   }*/
 
-  //Gets all Users
+  //Gets all the organisation categories
   if(req.method === 'GET'){
     const results = await query(sql`
       SELECT * FROM org_categories
@@ -23,6 +24,9 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     var slugName = slug(req.body.category_name)
     slugName = slugName.toLowerCase();
 
@@ -47,6 +51,9 @@ export default async (req, res) => {
 
   //Deletes data
   if(req.method === 'DELETE'){
+    if(!await apiAuth(req.cookies.user)){
+      return res.status(401).json({})
+    }
     const results = await query(sql`
       DELETE * FROM org WHERE slug = ${req.query.slug}
     `)
