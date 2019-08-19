@@ -10,7 +10,7 @@ const NavBar = styled.div`
   align-items: center;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
   background-color: #FFFFFF;
-  z-index: 1;
+  z-index: 2;
   .logo{
     margin-right: auto;
     cursor: pointer;

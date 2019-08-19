@@ -39,7 +39,7 @@ const Page = ({ categories }) => {
                   </label>
                 </div>
               ))}
-              <button className="no-style-button filter">
+              <button className="no-style-button filter" /*onClick={moreCategories()}*/>
                 <img src="static/img/cat_icon/more.svg" alt="elipsis in a circle"/>
                 <h6>
                   More

@@ -4,7 +4,7 @@ const SearchOverlay = styled.div`
     background-color: #FFFFFF;
     position: fixed;
     top: 60px;
-    z-index: 2;
+    z-index: 1;
 
     input{
       background: #F5F5F5;

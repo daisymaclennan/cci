@@ -54,11 +54,11 @@ const Page = ({ categories, orgs }) => {
 }
 
 const CatPage = ({ categories, orgs }) => {
-  const router = useRouter();
-  console.log('GETTING CATEGORY', router.query.cat)
+  const Router = useRouter();
+  console.log('GETTING CATEGORY', Router.query.cat)
 
   const category = categories.find(category => {
-    return category.slug === router.query.cat
+    return category.slug === Router.query.cat
   })
 
   /* if (!category) {
@@ -69,10 +69,14 @@ const CatPage = ({ categories, orgs }) => {
 
   console.log(categories)
 
-  const sub_categories = categories.filter( sub_category => {
+  const sub_categories = categories.filter(sub_category => sub_category.parent_category_id = category.category_id)
+
+  /*const sub_categories = categories.filter( sub_category => sub_category.name != NULL{
     console.log('testing category', sub_category.category_name, 'with parent id', sub_category.parent_category_id, 'against category', category.category_id)
     return sub_category.parent_category_id == category.category_id
-  })
+  })*/
+
+  console.log(sub_categories)
 
   return(
     <Layout>

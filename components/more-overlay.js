@@ -6,9 +6,13 @@ const MoreOverlay = styled.div`
   height: 100vh;
   width: 100vw;
   top: 60px;
-  z-index: 2;
+  z-index: 1;
   .flexbox{
     display: flex;
+    border-bottom: 1px solid #F5F5F5;
+  }
+  .bottom-box{
+    padding-top: 25px;
   }
   .flexbox h3{
     margin-top: 3px;
@@ -17,7 +21,10 @@ const MoreOverlay = styled.div`
   .flexbox div{
     padding-left: 10px;
   }
-  h4{
+  h2{
+    margin-bottom: 25px;
+  }
+  h4, h3{
     font-weight: normal;
     color: #4A4949;
   }
