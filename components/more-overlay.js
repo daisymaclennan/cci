@@ -6,14 +6,29 @@ const MoreOverlay = styled.div`
   height: 100vh;
   width: 100vw;
   top: 60px;
-  @media screen and (max-width: 999px){
+  z-index: 2;
+  .flexbox{
+    display: flex;
+  }
+  .flexbox h3{
+    margin-top: 3px;
+    letter-spacing: 0.15em;
+  }
+  .flexbox div{
+    padding-left: 10px;
+  }
+  h4{
+    font-weight: normal;
+    color: #4A4949;
+  }
+  @media screen and (max-width: 800px){
     left: 0;
     .inside{
       padding-left: 10px;
     }
   }
-  @media screen and (min-width: 1000px){
-    width: 360px;
+  @media screen and (min-width: 801px){
+    width: 300px;
     right: 0;
     .inside{
       width: 90%;

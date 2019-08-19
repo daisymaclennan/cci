@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const PrimaryButton = styled.div`
+const PrimaryButton = styled.a`
     display: flex;
     color: white;
     background: #0D87FF;
@@ -13,12 +13,16 @@ const PrimaryButton = styled.div`
     justify-content: center;
     align-items: center;
     width: 200px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     svg{
       fill: #FFFFFF;
       margin-left: 10px;
 
     }
     @media screen and (max-width: 999px){
+      position: fixed;
+      bottom: 20px;
+      left: calc(50% - 100px)
     }
 
   }

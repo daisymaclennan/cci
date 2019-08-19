@@ -28,10 +28,10 @@ const NavBar = styled.div`
   }
   @media screen and (min-width: 1000px){
     .logo{
-      margin-left: 50px;
+      margin-left: 20px;
     }
     .elipsis{
-      margin-right: 50px;
+      margin-right: 20px;
     }
     .search{
       margin-right: 20px;

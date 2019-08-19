@@ -4,6 +4,7 @@ const SearchOverlay = styled.div`
     background-color: #FFFFFF;
     position: fixed;
     top: 60px;
+    z-index: 2;
 
     input{
       background: #F5F5F5;
@@ -38,7 +39,7 @@ const SearchOverlay = styled.div`
     input:focus ~ .search-icon--bar{
       fill: #0D87FF;
     }
-    @media screen and (max-width: 999px){
+    @media screen and (max-width: 800px){
       height: 100vh;
       width: 100vw;
       left: 0;
@@ -65,7 +66,7 @@ const SearchOverlay = styled.div`
       }
 
     }
-    @media screen and (min-width: 1000px){
+    @media screen and (min-width: 801px){
       width: 360px;
       right: 0;
       border-radius: 20px;
