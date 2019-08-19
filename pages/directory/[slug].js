@@ -127,7 +127,7 @@ const CarouselContainer = ({entry}) => {
             </svg>
             Previous
           </button>
-          <span className="slide-track">{currentIndex + 1}/8</span>
+          <span className="slide-track">{currentIndex + 1}/{entry.images.length}</span>
           <button className={`next nav-button ${canScrollNext ? 'dark' : 'light'}`} onClick={scrollNext}>
             Next
             <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
