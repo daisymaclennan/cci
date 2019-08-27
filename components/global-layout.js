@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 600;
   }
   body {
-    background-color: #FFFFFF;
+
     font-family: 'Blinker', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   h2{
@@ -105,28 +105,43 @@ const GlobalStyle = createGlobalStyle`
       bottom: 0;
     }
   }
-  /*Overlay styles*/
-  .discover-hidden > button{
-    transform: rotate(180deg);
+  /*Hides default checkboxes from view*/
+  input[type="checkbox"]{
+    border: 0;
+    clip: rect(1px 1px 1px 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
+
+  /*DiscoverOverlay styles*/
   @media screen and (min-width: 800px){
-    /*Discover overlay styles*/
-    .discover-hidden{
+    body{
+        background-color: #F9F9F9;
+    }
+    .discoverClosed{
       top: calc(100% - 90px);
     }
-    .discover-show{
+    .discoverHalfway{
       top: calc(100% - 280px);
     }
-
-
+    .discoverOpen{
+      top: 140px;
+    }
   }
+
   @media screen and (max-width: 799px){
-    /*Discover overlay styles*/
-    .discover-hidden{
+    .discoverClosed{
       top: calc(100% - 90px);
     }
-    .discover-show{
+    .discoverHalfway{
       top: calc(100% - 250px);
+    }
+    .discoverOpen{
+      top: 160px;
     }
   }
 `
@@ -137,7 +152,6 @@ return(
   <div>
     <GlobalStyle />
     {children}
-
   </div>
 )}
 

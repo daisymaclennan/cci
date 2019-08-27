@@ -14,6 +14,9 @@ const OrgBox = styled.div`
     //outline: 5px solid red;
     display: block;
   }
+  img{
+    height: 40px;
+  }
 
 `
 

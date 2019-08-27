@@ -4,10 +4,11 @@ import Layout from '../../../../components/layout'
 import api from '../../../../lib/api'
 import { Formik, Form, Field, FieldArray } from 'formik';
 import AdminLayout from '../../../../components/admin-layout'
+import AdminContentSection from '../../../../components/admin-content-section'
 
-const Page = ({ org }) => (
+const Page = ({ org, cats }) => (
   <AdminLayout>
-    <div>
+    <AdminContentSection>
       <h1>Edit {org.name}</h1>
       <Formik
             initialValues={{name : org.name, address: org.address, postcode: org.postcode, owner: org.owner, descr: org.descr, phone_num: org.phone_num, website: org.website}}
@@ -51,6 +52,10 @@ const Page = ({ org }) => (
                   <Field component="textarea" name="descr"/>
                 </div>
                 <div>
+                  <label htmlFor="excerpt">Excerpt:</label>
+                  <Field type="text" name="excerpt"/>
+                </div>
+                <div>
                   <label htmlFor="feat_img">Featured image:</label>
                   <Field type="file" name="feat_img"/>
                 </div>
@@ -62,19 +67,29 @@ const Page = ({ org }) => (
                   <label htmlFor="website">Website:</label>
                   <Field type="text" name="website"/>
                 </div>
+                <label htmlFor="category">Category:</label>
+                <Field component="select" name="category">
+                {cats.map(cat => (
+                  <option value={cat.category_id} key={cat.category_name}>
+                      {cat.category_name}
+                  </option>
+                ))}
+                </Field>
                 <button type="submit">Save changes</button>
               </form>
             )}
           />
-        </div>
+        </AdminContentSection>
       </AdminLayout>
 )
 
 Page.getInitialProps = async ({ query }) => {
   const org = await api(`org/${query.slug}`)
+  const cats = await api('org/categories')
 
   return {
-    org: org.json
+    org: org.json,
+    cats: cats.json
   }
 }
 

@@ -6,6 +6,7 @@ import OrgDetailBox from '../../components/org-detail-box'
 import PrimaryButton from '../../components/primary-button'
 import IconLink from '../../components/icon-link'
 import LogoHeader from '../../components/logo-header'
+import Link from 'next/link'
 
 import Carousel from '../../components/carousel'
 
@@ -17,12 +18,14 @@ const Page = ({ entry }) => (
   <Layout>
     <LogoHeader>
       <img src={`/static/uploads/${entry.logo}`} alt={`${entry.name}'s logo`}/>
-      <IconLink>
-        <h5>Close</h5>
-        <svg width="9" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.09375 6L11.2188 9.125C11.4062 9.3125 11.5 9.5625 11.5 9.8125C11.5 10.0938 11.4062 10.3438 11.2188 10.5312L10.5312 11.2188C10.3125 11.4062 10.0625 11.5 9.8125 11.5C9.53125 11.5 9.3125 11.4062 9.125 11.2188L6 8.09375L2.875 11.2188C2.6875 11.4062 2.4375 11.5 2.1875 11.5C1.90625 11.5 1.65625 11.4062 1.46875 11.2188L0.78125 10.5312C0.59375 10.3438 0.5 10.0938 0.5 9.8125C0.5 9.5625 0.59375 9.3125 0.78125 9.125L3.90625 6L0.78125 2.875C0.59375 2.6875 0.5 2.46875 0.5 2.1875C0.5 1.9375 0.59375 1.6875 0.78125 1.46875L1.46875 0.78125C1.65625 0.59375 1.90625 0.5 2.1875 0.5C2.4375 0.5 2.6875 0.59375 2.875 0.78125L6 3.90625L9.125 0.78125C9.3125 0.59375 9.53125 0.5 9.8125 0.5C10.0625 0.5 10.3125 0.59375 10.5312 0.78125L11.2188 1.46875C11.4062 1.6875 11.5 1.9375 11.5 2.1875C11.5 2.46875 11.4062 2.6875 11.2188 2.875L8.09375 6Z" fill="#000000"/>
-        </svg>
-      </IconLink>
+      <Link href="/directory">
+          <IconLink>
+            <h5>Close</h5>
+            <svg width="9" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.09375 6L11.2188 9.125C11.4062 9.3125 11.5 9.5625 11.5 9.8125C11.5 10.0938 11.4062 10.3438 11.2188 10.5312L10.5312 11.2188C10.3125 11.4062 10.0625 11.5 9.8125 11.5C9.53125 11.5 9.3125 11.4062 9.125 11.2188L6 8.09375L2.875 11.2188C2.6875 11.4062 2.4375 11.5 2.1875 11.5C1.90625 11.5 1.65625 11.4062 1.46875 11.2188L0.78125 10.5312C0.59375 10.3438 0.5 10.0938 0.5 9.8125C0.5 9.5625 0.59375 9.3125 0.78125 9.125L3.90625 6L0.78125 2.875C0.59375 2.6875 0.5 2.46875 0.5 2.1875C0.5 1.9375 0.59375 1.6875 0.78125 1.46875L1.46875 0.78125C1.65625 0.59375 1.90625 0.5 2.1875 0.5C2.4375 0.5 2.6875 0.59375 2.875 0.78125L6 3.90625L9.125 0.78125C9.3125 0.59375 9.53125 0.5 9.8125 0.5C10.0625 0.5 10.3125 0.59375 10.5312 0.78125L11.2188 1.46875C11.4062 1.6875 11.5 1.9375 11.5 2.1875C11.5 2.46875 11.4062 2.6875 11.2188 2.875L8.09375 6Z" fill="#000000"/>
+            </svg>
+          </IconLink>
+      </Link>
     </LogoHeader>
 
     <OrgDetailBox>
@@ -77,66 +80,70 @@ const Page = ({ entry }) => (
 )
 
 const CarouselContainer = ({entry}) => {
-  const [embla, setEmbla] = useState(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [canScrollPrev, setScrollPrev] = useState(0)
-  const [canScrollNext, setScrollNext] = useState(1)
-  const scrollPrev = () => embla.scrollPrev()
-  const scrollNext = () => embla.scrollNext()
+  if(entry.images.length > 0){
+    const [embla, setEmbla] = useState(null)
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [canScrollPrev, setScrollPrev] = useState(0)
+    const [canScrollNext, setScrollNext] = useState(1)
+    const scrollPrev = () => embla.scrollPrev()
+    const scrollNext = () => embla.scrollNext()
 
-  useEffect(() => {
-    if (embla) {
-      embla.on('select', () => {
-        const currentIndex = embla.selectedScrollSnap()
-        setCurrentIndex(currentIndex)
+    useEffect(() => {
+      if (embla) {
+        embla.on('select', () => {
+          const currentIndex = embla.selectedScrollSnap()
+          setCurrentIndex(currentIndex)
 
-        const canScrollPrev = embla.canScrollPrev()
-        setScrollPrev(canScrollPrev)
+          const canScrollPrev = embla.canScrollPrev()
+          setScrollPrev(canScrollPrev)
 
-        const canScrollNext = embla.canScrollNext()
-        setScrollNext(canScrollNext)
-      })
-    }
-  }, [embla])
+          const canScrollNext = embla.canScrollNext()
+          setScrollNext(canScrollNext)
+        })
+      }
+    }, [embla])
 
-  return (
-    <Carousel>
-        <EmblaCarouselReact
-          htmlTagName="div"
-          className="carousel"
-          emblaRef={c => setEmbla(c)}
-          options={{
-            loop: false,
-            align: 'start'
-          }}
-        >
-          <div className="carousel-item-container">
-            {entry.images.map( image => (
-              <div className="carousel-item">
-                <div className="carousel-item-inner">
-                  <img src={`/static/uploads/${image.image_location}`} alt={`${entry.name}'s gallery image`}/>
+    return (
+      <Carousel>
+          <EmblaCarouselReact
+            htmlTagName="div"
+            className="carousel"
+            emblaRef={c => setEmbla(c)}
+            options={{
+              loop: false,
+              align: 'start'
+            }}
+          >
+            <div className="carousel-item-container">
+              {entry.images.map( image => (
+                <div className="carousel-item">
+                  <div className="carousel-item-inner">
+                    <img src={`/static/uploads/${image.image_location}`} alt={`${entry.name}'s gallery image`}/>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </EmblaCarouselReact>
+          <div className="navigation">
+            <button className={`prev nav-button ${canScrollPrev ? 'dark' : 'light'}`} onClick={scrollPrev}>
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.125 4.71875C0.0625 4.8125 0.03125 4.90625 0.03125 5C0.03125 5.125 0.0625 5.1875 0.125 5.25L4.71875 9.90625C4.78125 9.96875 4.875 10 4.96875 10C5.0625 10 5.15625 9.96875 5.25 9.875L5.875 9.28125C5.9375 9.21875 5.96875 9.125 5.96875 9C5.96875 8.90625 5.9375 8.8125 5.875 8.75L2.15625 5L5.875 1.25C5.9375 1.1875 5.96875 1.125 5.96875 1C5.96875 0.90625 5.9375 0.8125 5.875 0.71875L5.25 0.09375C5.15625 0.03125 5.0625 0 4.96875 0C4.875 0 4.78125 0.03125 4.71875 0.09375L0.125 4.71875Z"/>
+              </svg>
+              Previous
+            </button>
+            <span className="slide-track">{currentIndex + 1}/{entry.images.length}</span>
+            <button className={`next nav-button ${canScrollNext ? 'dark' : 'light'}`} onClick={scrollNext}>
+              Next
+              <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.875 5.25V5.28125C5.9375 5.21875 5.96875 5.125 5.96875 5C5.96875 4.90625 5.9375 4.8125 5.875 4.71875L1.28125 0.09375C1.1875 0.03125 1.09375 0 1 0C0.90625 0 0.8125 0.03125 0.75 0.09375L0.125 0.71875C0.0625 0.8125 0.03125 0.90625 0.03125 1C0.03125 1.125 0.0625 1.1875 0.125 1.25L3.84375 5L0.125 8.75C0.0625 8.8125 0.03125 8.90625 0.03125 9C0.03125 9.125 0.0625 9.21875 0.125 9.28125L0.75 9.90625C0.8125 9.96875 0.90625 10 1 10C1.09375 10 1.1875 9.96875 1.28125 9.875L5.875 5.25Z"/>
+              </svg>
+            </button>
           </div>
-        </EmblaCarouselReact>
-        <div className="navigation">
-          <button className={`prev nav-button ${canScrollPrev ? 'dark' : 'light'}`} onClick={scrollPrev}>
-            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.125 4.71875C0.0625 4.8125 0.03125 4.90625 0.03125 5C0.03125 5.125 0.0625 5.1875 0.125 5.25L4.71875 9.90625C4.78125 9.96875 4.875 10 4.96875 10C5.0625 10 5.15625 9.96875 5.25 9.875L5.875 9.28125C5.9375 9.21875 5.96875 9.125 5.96875 9C5.96875 8.90625 5.9375 8.8125 5.875 8.75L2.15625 5L5.875 1.25C5.9375 1.1875 5.96875 1.125 5.96875 1C5.96875 0.90625 5.9375 0.8125 5.875 0.71875L5.25 0.09375C5.15625 0.03125 5.0625 0 4.96875 0C4.875 0 4.78125 0.03125 4.71875 0.09375L0.125 4.71875Z"/>
-            </svg>
-            Previous
-          </button>
-          <span className="slide-track">{currentIndex + 1}/{entry.images.length}</span>
-          <button className={`next nav-button ${canScrollNext ? 'dark' : 'light'}`} onClick={scrollNext}>
-            Next
-            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.875 5.25V5.28125C5.9375 5.21875 5.96875 5.125 5.96875 5C5.96875 4.90625 5.9375 4.8125 5.875 4.71875L1.28125 0.09375C1.1875 0.03125 1.09375 0 1 0C0.90625 0 0.8125 0.03125 0.75 0.09375L0.125 0.71875C0.0625 0.8125 0.03125 0.90625 0.03125 1C0.03125 1.125 0.0625 1.1875 0.125 1.25L3.84375 5L0.125 8.75C0.0625 8.8125 0.03125 8.90625 0.03125 9C0.03125 9.125 0.0625 9.21875 0.125 9.28125L0.75 9.90625C0.8125 9.96875 0.90625 10 1 10C1.09375 10 1.1875 9.96875 1.28125 9.875L5.875 5.25Z"/>
-            </svg>
-          </button>
-        </div>
-    </Carousel>
-  )
+      </Carousel>
+    )
+  }else{
+    return <div/>
+  }
 }
 
 Page.getInitialProps = async ({ query }) => {

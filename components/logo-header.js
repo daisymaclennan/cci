@@ -5,6 +5,9 @@ const LogoHeader = styled.div`
   justify-content: space-between;
   img{
     object-fit: contain;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: auto;
   }
 
 `

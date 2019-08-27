@@ -6,10 +6,41 @@ import api from '../lib/api'
 import { useState } from 'react'
 import SecondaryButton from '../components/secondary-button'
 import { Formik, Form, Field, FieldArray } from 'formik';
+import IconLink from '../components/icon-link'
+import VerticalToggleButton from '../components/vertical-toggle-button'
+import ParentCategoryFilterButtons from '../components/parent-category-filter-buttons'
 
 
 const Page = ({ categories }) => {
-  const [ discoverOpen, setDiscoverOpen ] = useState(false)
+  const [ discoverOpen, setDiscoverOpen ] = useState("closed")
+
+  //Sets the value of visibilityClass based on the state of discoverOpen
+  let visibilityClass
+  switch (discoverOpen){
+    case "closed":
+      visibilityClass = "discoverClosed"
+      break
+    case "menu":
+      visibilityClass = "discoverHalfway"
+      break
+    case "open":
+      visibilityClass = "discoverOpen"
+  }
+
+  function toggleMenu(){
+    var nextState = (discoverOpen === "menu")
+      ? "closed"
+      : "menu"
+    if(discoverOpen === "open"){
+      nextState = "closed"
+    }
+    setDiscoverOpen(nextState)
+  }
+
+  const Content = discoverOpen === "open"
+    ? DiscoverOpen
+    : DiscoverHalfway
+
   return(
     <Layout>
       <SecondaryButton href="/directory">
@@ -18,40 +49,126 @@ const Page = ({ categories }) => {
         </svg>
         View map as list
       </SecondaryButton>
-      <DiscoverOverlay className={discoverOpen ? 'discover-show' : 'discover-hidden'}>
-        <button className="not-style-button open-button" onClick={() => setDiscoverOpen(!discoverOpen)}>
-          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.625 9.3125H7.57813C7.67188 9.40625 7.8125 9.45312 8 9.45312C8.14063 9.45312 8.28125 9.40625 8.42188 9.3125L15.3594 2.42187C15.4531 2.32812 15.5 2.1875 15.5 2.04687C15.5 1.90625 15.4531 1.76562 15.3594 1.625L14.4219 0.6875C14.2812 0.59375 14.1406 0.546875 14 0.546875C13.8125 0.546875 13.7188 0.59375 13.625 0.6875L8 6.26562L2.375 0.6875C2.28125 0.59375 2.14063 0.546875 2 0.546875C1.8125 0.546875 1.67188 0.59375 1.57813 0.6875L0.640625 1.625C0.546875 1.76562 0.5 1.90625 0.5 2.04687C0.5 2.1875 0.546875 2.32812 0.6875 2.42187L7.625 9.3125Z" fill="white"/>
-          </svg>
-        </button>
-        <h2>Discover</h2>
-        <Formik
-          render={() => (
-            <div  className="parent-category-box">
-              {categories.map( category => !category.parent_category_id && (
-                <div className="filter">
-                  <Field type="checkbox" name="filter-box" value={category.slug} id={category.slug}/>
-                  <label htmlFor={category.slug}>
-                    <img src={`static/img/cat_icon/${category.icon_filename}`}/>
-                    <h6>
-                      {category.category_name}
-                    </h6>
-                  </label>
-                </div>
-              ))}
-              <button className="no-style-button filter" /*onClick={moreCategories()}*/>
-                <img src="static/img/cat_icon/more.svg" alt="elipsis in a circle"/>
-                <h6>
-                  More
-                </h6>
-              </button>
-            </div>
-          )}
+
+      <DiscoverOverlay className={`${visibilityClass}`}>
+        <VerticalToggleButton
+          isActive={discoverOpen !== 'closed'}
+          onClick={toggleMenu}
         />
+
+        <Content toggleMenu={toggleMenu} categories={categories}  setDiscoverOpen={setDiscoverOpen}/>
       </DiscoverOverlay>
     </Layout>
   )
 }
+
+
+const DiscoverHalfway = ({categories, setDiscoverOpen}) => {
+  return(
+    <ParentCategoryFilterButtons className="categories-content">
+      <h2>Discover</h2>
+      <Formik
+        render={() => (
+          <div  className="parent-category-box">
+            {categories.map( category => !category.parent_category_id && (
+              <div className="filter">
+                <Field type="checkbox" name="filter-box" value={category.slug} id={category.slug}/>
+                <label htmlFor={category.slug}>
+                  <img src={`static/img/cat_icon/${category.icon_filename}`}/>
+                  <h6>
+                    {category.category_name}
+                  </h6>
+                </label>
+              </div>
+            ))}
+            <button className="no-style-button filter" onClick={() => {setDiscoverOpen("open")}}>
+              <img src="static/img/cat_icon/more.svg" alt="elipsis in a circle"/>
+              <h6>
+                More
+              </h6>
+            </button>
+          </div>
+        )}
+      />
+    </ParentCategoryFilterButtons>
+  )
+}
+
+const DiscoverOpen = ({categories, setDiscoverOpen}) => {
+  const categoryByParentId = categories.reduce(function(reduced, category){
+    if (typeof reduced[category.category_id] === 'undefined') {
+      reduced[category.category_id] = []
+    }
+
+    if (!category.parent_category_id) {
+      return reduced
+    }
+
+    if(typeof reduced[category.parent_category_id] === "undefined"){
+      reduced[category.parent_category_id] = []
+    }
+
+    reduced[category.parent_category_id].push(category)
+
+    return reduced
+  }, {})
+
+  console.log('cats by parent', categoryByParentId)
+  return(
+    <div className="categories-content">
+      <div className="categories-top-bar">
+        <h2>More</h2>
+        <IconLink onClick={() => {setDiscoverOpen("menu")}}>
+          <h5>Back</h5>
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.96875 1.8125C7.8125 1.6875 7.75 1.5 7.75 1.3125C7.75 1.125 7.8125 0.9375 7.96875 0.75L8.5 0.25C8.625 0.09375 8.8125 0 9 0C9.1875 0 9.375 0.09375 9.53125 0.25L13.7812 4.46875C13.9062 4.625 14 4.8125 14 5C14 5.21875 13.9062 5.40625 13.7812 5.53125L9.53125 9.75C9.375 9.9375 9.1875 10 9 10C8.8125 10 8.625 9.9375 8.5 9.75L7.96875 9.25C7.8125 9.09375 7.75 8.90625 7.75 8.71875C7.75 8.53125 7.8125 8.34375 7.96875 8.1875L10 6.125H0.75C0.53125 6.125 0.34375 6.0625 0.21875 5.90625C0.0625 5.78125 0 5.59375 0 5.375V4.625C0 4.4375 0.0625 4.25 0.21875 4.09375C0.34375 3.96875 0.53125 3.875 0.75 3.875H10L7.96875 1.8125Z" fill="#000000"/>
+          </svg>
+        </IconLink>
+      </div>
+      <Formik
+        render={() => (
+          <div className="categories">
+            {categories.map( category => !category.parent_category_id && (
+              <div key={category.category_id} className="single-category">
+                <Field type="checkbox" name="filter-box" value={category.slug} id={category.slug}/>
+                <label htmlFor={category.slug} className="parent-category">
+                  <img src={`static/img/cat_icon/${category.icon_filename}`}/>
+                  <h3>
+                    {category.category_name}
+                  </h3>
+                </label>
+                <div className="child-categories">
+                {categoryByParentId[category.category_id].map( sub_category => (
+                  <div key={sub_category.category_id}>
+                    <Field type="checkbox" name="filter-box" value={sub_category.slug} id={sub_category.slug}/>
+                    <label htmlFor={sub_category.slug}>
+                      <p>{sub_category.category_name}</p>
+                    </label>
+                  </div>
+                ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      />
+    </div>
+  )
+}
+
+/*
+{categories.forEach(function(sub_category){
+  if(sub_category.parent_category_id != category.category_id){
+    return
+  }
+  <>
+    <Field type="checkbox" name="filter-box" value={sub_category.slug} id={sub_category.slug}/>
+    <label htmlFor={sub_category.slug}>
+      <h4>{sub_category.category_name}</h4>
+    </label>
+  </>
+})}*/
+
 
 
 Page.getInitialProps = async (req) => {

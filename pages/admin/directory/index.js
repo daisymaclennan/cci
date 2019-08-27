@@ -3,10 +3,11 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import api from '../../../lib/api'
 import Link from 'next/link'
 import AdminLayout from '../../../components/admin-layout'
+import AdminContentSection from '../../../components/admin-content-section'
 
 const Page = ({orgs}) => (
   <AdminLayout>
-    <div>
+    <AdminContentSection>
       <h2>Directory</h2>
       <a href="/admin/directory/categories">View categories</a>
       <a href="/admin/directory/add">Add new organisation</a>
@@ -19,7 +20,7 @@ const Page = ({orgs}) => (
           </Link>
         ))}
       </ul>
-    </div>
+    </AdminContentSection>
   </AdminLayout>
 )
 

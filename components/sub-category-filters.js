@@ -19,16 +19,7 @@ const Filters = styled.div`
     color: #4A4949;
     transition: 0.25s ease-in-out;
   }
-  input[type="checkbox"]{
-    border: 0;
-    clip: rect(1px 1px 1px 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
+
   input[type="checkbox"]:checked ~ label{
     background: #0D87FF;
     color: #FFFFFF;

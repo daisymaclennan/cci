@@ -4,7 +4,7 @@ const DiscoverOverlay = styled.div`
     background-color: #FFFFFF;
     border-radius: 20px;
     position: fixed;
-    height: 600px;
+    bottom: -10;
     transition: top 2s ease-in-out;
     z-index: 1;
     .open-button{
@@ -20,19 +20,68 @@ const DiscoverOverlay = styled.div`
       position: absolute;
       top: -20px;
       left: calc(50% - 20px);
+      transform: rotate(180deg);
     }
+    h2{
+      color: #1D1D1D;
+    }
+    h3{
+      padding-left: 20px;
+      color: #4A4949;
+      letter-spacing: 0.15em;
+    }
+    .categories-top-bar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+    }
+    .discover-hidden > button{
+      transform: rotate(180deg);
+    }
+    .categories-content{
+      width: calc(100% - 30px);
+      margin-left: auto;
+      margin-right: auto;
+      overflow-y: scroll;
+    }
+    .parent-category{
+      display: flex;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    .parent-category img{
+      width: 24px;
+    }
+    .single-category{
+      border-bottom: 1px solid #F5F5F5;
+    }
+    .child-categories{
+      padding-left: 45px;
+      color: #4A4949;
+    }
+    .child-categories > h3{
+      padding-bottom: 20px;
+    }
+    p:first-of-type{
+      margin-top: 0;
+    }
+
+    @media screen and (min-width: 800px){
+      width: 360px;
+      left: 0;
+    }
+
+    @media screen and (max-width: 799px){
+      width: 100vw;
+      left: 0;
+    }
+
+
+    /*DiscoverHalfway styles
     h2{
       text-align: center;
       padding-top: 20px;
-    }
-    @media screen and (max-width: 800px){
-      width: 100vw;
-      left: 0;
-
-    }
-    @media screen and (min-width: 801px){
-      width: 360px;
-      left: 0;
     }
     .parent-category-box{
       display: flex;
@@ -76,14 +125,13 @@ const DiscoverOverlay = styled.div`
       margin-right: 3px;
       position: relative;
       margin-bottom: 20px;
-
-
     }
+
     h6{
       margin-top: 5px;
       text-align: center;
-    }
-  }
+    }*/
+
 
 `
 

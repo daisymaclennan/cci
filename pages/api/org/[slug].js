@@ -14,7 +14,7 @@ export default async (req, res) => {
 
     //Need to add featured image updating
     const results = await query(sql`
-      UPDATE org SET name = ${req.body.name}, address = ${req.body.address}, postcode = ${req.body.postcode}, owner = ${req.body.owner}, descr = ${req.body.desr}, phone_num = ${req.body.phone_num}, website = ${req.body.website}, slug = ${slugName}, email_address = ${req.body.email_address}  WHERE slug = ${req.query.slug}
+      UPDATE org SET name = ${req.body.name}, address = ${req.body.address}, postcode = ${req.body.postcode}, owner = ${req.body.owner}, descr = ${req.body.descr}, phone_num = ${req.body.phone_num}, website = ${req.body.website}, slug = ${slugName}, email_address = ${req.body.email_address}, excerpt = ${req.body.excerpt}, category_id = ${req.body.category}  WHERE slug = ${req.query.slug}
     `)
 
     if(results.error){

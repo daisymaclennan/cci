@@ -33,10 +33,24 @@ export default async (req, res) => {
     var slugName = slug(req.body.name)
     slugName = slugName.toLowerCase();
 
+    /*Makes an excerpt out of the description
+    const excerpt = req.body.desc
+
+    if(req.body.excerpt){
+      excerpt = req.body.excerpt
+      console.log("dfnghjuijhgvjkhb")
+    }else if(req.body.desc){
+      excerpt = req.body.desc.slice(0, 175)
+      console.log(req.body.desc.slice(0, 175))
+    }
+
+    console.log(excerpt)*/
+
     //Checks if there is an organisation with the same slugName
     const exists = await query(sql`
       SELECT id FROM org WHERE slug = ${slugName}
     `)
+
 
     if(exists.length > 0){
       console.log('A business is already listed with that name.')
@@ -53,11 +67,12 @@ export default async (req, res) => {
 
       //Need to insert the file path for the featured image into the database
       const results = await query(sql`
-        INSERT INTO org (name, address, postcode, owner, descr, phone_num, website, slug, email_address) VALUES ( ${req.body.name}, ${req.body.address}, ${req.body.postcode}, ${req.body.owner}, ${req.body.desc}, ${req.body.phone_num}, ${req.body.website}, ${slugName}, ${req.body.email_address})
+        INSERT INTO org (name, address, postcode, owner, descr, phone_num, website, slug, email_address, excerpt, category_id) VALUES ( ${req.body.name}, ${req.body.address}, ${req.body.postcode}, ${req.body.owner}, ${req.body.desc}, ${req.body.phone_num}, ${req.body.website}, ${slugName}, ${req.body.email_address}, ${req.body.excerpt}, ${req.body.category_id})
       `)
       if(results.error){
         throw results.error;
       }
     }
+    return "Added successfully"
   }
 }
