@@ -22,7 +22,7 @@ const ParentCategories = ({ categories}) => {
     <>
       {categories.map( category => !category.parent_category_id && (
         <OrgCategoryHorizontal key={category.category_id}>
-            <Link href="/directory?cat=[cat]" as={`/directory?cat=${category.category_id}`}>
+            <Link href={`/directory?cat=${category.category_id}`}>
               <a>
                 <img src={`/static/img/cat_icon/${category.icon_filename}`}/>
                 <h3 className="org_category">{category.category_name}</h3>
