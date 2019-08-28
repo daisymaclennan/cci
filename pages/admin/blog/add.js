@@ -38,7 +38,7 @@ const Page = () => (
                 <button type="submit">Save</button>
               </form>
             )}
-          />
+        />
       {process.browser && (
         <LazyEditor
             autofocus

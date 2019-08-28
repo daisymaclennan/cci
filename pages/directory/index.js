@@ -49,6 +49,9 @@ const Page = ({ categories, orgs }) => {
 const CatPage = ({ categories, orgs }) => {
   const Router = useRouter();
 
+  console.log('categories', categories)
+  console.log('selected category', Router.query.cat)
+
   const category = categories.find(category => {
     return category.category_id == Router.query.cat
   })

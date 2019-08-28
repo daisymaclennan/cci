@@ -9,6 +9,14 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import IconLink from '../components/icon-link'
 import VerticalToggleButton from '../components/vertical-toggle-button'
 import ParentCategoryFilterButtons from '../components/parent-category-filter-buttons'
+//import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+
+// const LazyMap = React.lazy(() => import('components/org-map.js'));
+
+//const loadMap = import('react-leaflet')
+
+// const { Map, TileLayer, Marker, Popup } = await LoadMap()
+
 
 
 const Page = ({ categories }) => {
@@ -41,6 +49,8 @@ const Page = ({ categories }) => {
     ? DiscoverOpen
     : DiscoverHalfway
 
+  //const position = [this.state.lat, this.state.lng]
+
   return(
     <Layout>
       <SecondaryButton href="/directory">
@@ -49,6 +59,15 @@ const Page = ({ categories }) => {
         </svg>
         View map as list
       </SecondaryButton>
+
+      {/*process.browser && (
+        <Map center={position} zoom={this.state.zoom}>
+          <TileLayer
+          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </Map>
+      )*/}
 
       <DiscoverOverlay className={`${visibilityClass}`}>
         <VerticalToggleButton
