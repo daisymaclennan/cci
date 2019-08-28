@@ -13,6 +13,7 @@ const AdminContentSection = styled.div`
     padding-right: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 40px;
   }
 `
 

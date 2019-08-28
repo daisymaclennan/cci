@@ -18,9 +18,10 @@ const AdminSideBar = styled.div`
     position: fixed;
     top: 60px;
   }
+  @media screen and (max-width: 800px){
+    display: none;
+  }
 
 `
-
-
 
 export default AdminSideBar

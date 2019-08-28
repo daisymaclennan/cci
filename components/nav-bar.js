@@ -5,7 +5,7 @@ const NavBar = styled.div`
   height: 60px;
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
