@@ -11,7 +11,15 @@ const Page = ({ org, cats }) => (
     <AdminContentSection>
       <h1>Edit {org.name}</h1>
       <Formik
-            initialValues={{name : org.name, address: org.address, postcode: org.postcode, owner: org.owner, descr: org.descr, phone_num: org.phone_num, website: org.website}}
+            initialValues={{name : org.name,
+                            address: org.address,
+                            postcode: org.postcode,
+                            email_address: org.email_address,
+                            owner: org.owner,
+                            descr: org.descr,
+                            excerpt: org.excerpt,
+                            phone_num: org.phone_num, 
+                            website: org.website}}
             onSubmit={async values => {
               // const register = await api('directory/add', {
               const register = await api(`org/${org.slug}`, {
