@@ -6,7 +6,7 @@ import apiAuth from '../../../lib/api-auth'
 export default async (req, res) => {
   //Update request
   if(req.method === 'PATCH'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     var slugName = slug(req.body.name)

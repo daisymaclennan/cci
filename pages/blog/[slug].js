@@ -12,8 +12,8 @@ const Page = ({ post }) => (
   </Layout>
 )
 
-Page.getInitialProps = async ({ query }) => {
-  const post = await api(`blog/${query.slug}`)
+Page.getInitialProps = async ctx => {
+  const post = await api(`blog/${ctx.query.slug}`, { ctx })
 
   return {
     post: post.json

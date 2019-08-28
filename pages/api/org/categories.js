@@ -24,7 +24,7 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     var slugName = slug(req.body.category_name)
@@ -51,7 +51,7 @@ export default async (req, res) => {
 
   //Deletes data
   if(req.method === 'DELETE'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     const results = await query(sql`
