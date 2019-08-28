@@ -24,6 +24,8 @@ export default async (req, res) => {
       return;
     }
 
+    console.log('got users from db', results)
+
     //Returns the results of the sql query
     res.json(results)
     return

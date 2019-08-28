@@ -5,7 +5,7 @@ const DiscoverOverlay = styled.div`
     border-radius: 20px;
     position: fixed;
     bottom: -10;
-    transition: top 2s ease-in-out;
+    transition: 2s ease-in-out;
     z-index: 1;
     .open-button{
       background: #0D87FF;
@@ -66,6 +66,10 @@ const DiscoverOverlay = styled.div`
     p:first-of-type{
       margin-top: 0;
     }
+    .categories{
+      height: -webkit-fill-available;
+      overflow-y: scroll;
+    }
 
     @media screen and (min-width: 800px){
       width: 360px;
@@ -76,64 +80,61 @@ const DiscoverOverlay = styled.div`
       width: 100vw;
       left: 0;
     }
-
-
-    /*DiscoverHalfway styles
-    h2{
-      text-align: center;
-      padding-top: 20px;
-    }
-    .parent-category-box{
-      display: flex;
-      flex-wrap: wrap;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    img{
-      width: 40px;
-      height: 40px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    label{
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    input[type="checkbox"]:checked > div{
-      background: #F3F3F3;
-    }
-    input[type="checkbox"]{
-      border: 0;
-      clip: rect(1px 1px 1px 1px);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    .filter{
-      height: 70px;
-      display: inline-block;
-      min-width:70px;
-      margin-top: 8px;
-      margin-left: 3px;
-      margin-right: 3px;
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    h6{
-      margin-top: 5px;
-      text-align: center;
-    }*/
-
-
 `
 
 
 export default DiscoverOverlay
+
+/*DiscoverHalfway styles
+h2{
+  text-align: center;
+  padding-top: 20px;
+}
+.parent-category-box{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+img{
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+input[type="checkbox"]:checked > div{
+  background: #F3F3F3;
+}
+input[type="checkbox"]{
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.filter{
+  height: 70px;
+  display: inline-block;
+  min-width:70px;
+  margin-top: 8px;
+  margin-left: 3px;
+  margin-right: 3px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+h6{
+  margin-top: 5px;
+  text-align: center;
+}*/

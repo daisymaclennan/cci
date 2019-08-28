@@ -9,13 +9,46 @@ export default async (req, res) => {
     const results = await query(sql`
       SELECT * FROM org
       `)
+
+
+
     if(results.error){
       throw results.error;
-    }else{
-      res.json(
-        results
-      )
     }
+
+    console.log(results)
+
+    const resultsWithCats = await Promise.all(results.map(async result => {
+      result.allCategories = await query(sql`
+        SELECT
+          category_id,
+          category_name,
+          category_id,
+          @pv := parent_category_id
+        FROM (
+          SELECT
+              *
+          FROM
+              org_categories
+          ORDER BY
+              category_id DESC
+        ) org_categories
+        JOIN
+          (
+              SELECT @pv := ${result.category_id}
+          ) tmp
+        WHERE
+          category_id = @pv;
+        `)
+
+      result.allCategories = result.allCategories.map(result => result.category_id)
+
+      return result
+    }))
+
+    res.json(
+      resultsWithCats
+    )
   }
 
   //Sends data to the server

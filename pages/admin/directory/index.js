@@ -10,6 +10,7 @@ const Page = ({orgs}) => (
     <AdminContentSection>
       <h2>Directory</h2>
       <a href="/admin/directory/categories">View categories</a>
+      <br/>
       <a href="/admin/directory/add">Add new organisation</a>
       <ul>
         {orgs.map(org => (

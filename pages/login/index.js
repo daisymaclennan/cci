@@ -4,6 +4,7 @@ import Cookies from  'js-cookie'
 import api from '../../lib/api'
 import Router from 'next/router'
 import { useCookies } from 'react-cookie'
+import Layout from '../../components/layout'
 
 
 const Page = () => {
@@ -13,7 +14,7 @@ const Page = () => {
     Router.push('/admin')
   }
   return(
-    <div>
+    <Layout>
       <h1>Log in</h1>
       <Formik
             initialValues={{email_address : '', password: ''}}
@@ -41,7 +42,7 @@ const Page = () => {
               </form>
             )}
           />
-        </div>
+        </Layout>
 )}
 
 export default Page

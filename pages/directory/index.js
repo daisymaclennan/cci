@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Link from 'next/link'
 import api from '../../lib/api'
 import Layout from '../../components/layout'
@@ -6,7 +6,6 @@ import TitleBox from '../../components/title-box'
 import OrgCategoryHorizontal from '../../components/org-category-horizontal'
 import {Router, useRouter} from 'next/router'
 import OrgBox from '../../components/org-box'
-import { Formik, Form, Field, FieldArray } from 'formik';
 import Filters from '../../components/sub-category-filters'
 import Content from '../../components/content'
 import SecondaryButton from '../../components/secondary-button'
@@ -51,18 +50,20 @@ const CatPage = ({ categories, orgs }) => {
   const Router = useRouter();
 
   const category = categories.find(category => {
-    return category.slug === Router.query.cat
+    return category.category_id == Router.query.cat
   })
 
-  const filters = [Router.query.cat]
+  const [filters, changeFilters] = useState({
+    // [Router.query.cat]: true
+  })
 
-  function addFilters(newCategory){
-    if(filters.includes(newCategory)){
-      return
+  const filtersApplied = Object.entries(filters).reduce((reduced, [ key, value ]) => {
+    if (reduced) {
+      return reduced
     }
-    filters.push(newCategory)
-    console.log(filters)
-  }
+
+    return value
+  }, false)
 
   //console.log(category.category_name)
 
@@ -75,6 +76,14 @@ const CatPage = ({ categories, orgs }) => {
     return sub_category.parent_category_id == category.category_id
   })
 
+  const activeOrgs = orgs.filter( org => {
+    return org.allCategories.some((category) => {
+      if (filtersApplied) {
+        return filters[category]
+      }
+      return Router.query.cat == category
+    })
+  })
 
   return(
     <Layout>
@@ -97,24 +106,30 @@ const CatPage = ({ categories, orgs }) => {
           </Link>
         </CatSlugHeader>
         <Filters>
-          <Formik
-            /*onChange={submitForm} want the form to submit on the change of any input*/
-            render={() => (
-              <>
-                {sub_categories.map( sub_cat => (
-                  <div key={sub_cat.slug}>
-                    <Field type="checkbox" name="filter" value={sub_cat.slug} id={sub_cat.slug}/>
-                    <label htmlFor={sub_cat.slug}>{sub_cat.category_name}</label>
-                  </div>
-                ))}
-              </>
-            )}
-          />
+
+          <form
+            onChange={e => {
+              console.log('values', e.target.name, e.target.checked)
+              changeFilters({
+                ...filters,
+                [e.target.name]: e.target.checked
+              })
+            }}
+          >
+            {sub_categories.map( sub_cat => (
+              <div key={sub_cat.slug}>
+                <input type="checkbox" name={sub_cat.category_id} id={sub_cat.slug}/>
+                <label htmlFor={sub_cat.slug}>{sub_cat.category_name}</label>
+              </div>
+            ))}
+          </form>
         </Filters>
 
+        {/*<pre>{JSON.stringify(filters, null, 2)}</pre>
+        <p>filtered? {filtersApplied ? 'yes' : 'no'}</p>*/}
 
         <GridOnDesktop>
-          {orgs.map( org => (
+          {activeOrgs.map( org => (
             <Link href="/directory/[slug]" as={`/directory/${org.slug}`}>
               <OrgBox>
                 <div>
@@ -148,3 +163,20 @@ Page.getInitialProps = async (req) => {
 }
 
 export default Page
+
+
+/*
+Old version of the form using Formik
+<Formik
+  onChange={submitForm}
+  render={() => (
+    <>
+      {sub_categories.map( sub_cat => (
+        <div key={sub_cat.slug}>
+          <Field type="checkbox" name="filter" value={sub_cat.slug} id={sub_cat.slug}/>
+          <label htmlFor={sub_cat.slug}>{sub_cat.category_name}</label>
+        </div>
+      ))}
+    </>
+  )}
+/> */

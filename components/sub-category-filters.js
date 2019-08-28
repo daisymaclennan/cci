@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
 const Filters = styled.div`
-  display: flex;
+  form{
+    display: flex;
   flex-flow: wrap;
+  }
 
   div{
     margin-bottom: 20px;
