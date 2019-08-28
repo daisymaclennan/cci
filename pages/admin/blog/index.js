@@ -24,8 +24,8 @@ const Page = ({posts}) => (
   </AdminLayout>
 )
 
-Page.getInitialProps = async (req) => {
-  const posts = await api('blog')
+Page.getInitialProps = async ctx => {
+  const posts = await api('blog', { ctx })
 
   return {
     posts: posts.json

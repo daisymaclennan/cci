@@ -26,9 +26,8 @@ const Page = ({users, error}) => (
   </AdminLayout>
 )
 
-Page.getInitialProps = async (req) => {
-  console.log('cookies', req.headers.cookies)
-  const users = await api('users')
+Page.getInitialProps = async ctx => {
+  const users = await api('users', { ctx })
   const error = !users.res.ok
 
   return {

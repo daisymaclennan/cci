@@ -146,8 +146,8 @@ const CarouselContainer = ({entry}) => {
   }
 }
 
-Page.getInitialProps = async ({ query }) => {
-  const entry = await api(`org/${query.slug}`)
+Page.getInitialProps = async ctx => {
+  const entry = await api(`org/${ctx.query.slug}`, { ctx })
 
   return {
     entry: entry.json

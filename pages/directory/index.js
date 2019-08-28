@@ -152,9 +152,9 @@ const CatPage = ({ categories, orgs }) => {
 }
 
 
-Page.getInitialProps = async (req) => {
-  const categories = await api('org/categories')
-  const orgs = await api('org')
+Page.getInitialProps = async ctx => {
+  const categories = await api('org/categories', { ctx })
+  const orgs = await api('org', { ctx })
 
   return {
     categories: categories.json,

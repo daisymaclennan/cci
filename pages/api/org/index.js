@@ -53,7 +53,7 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     //Throws an error if the request method is not POST

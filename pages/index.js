@@ -171,8 +171,8 @@ const DiscoverOpen = ({categories, setDiscoverOpen}) => {
 
 
 
-Page.getInitialProps = async (req) => {
-  const categories = await api('org/categories')
+Page.getInitialProps = async ctx => {
+  const categories = await api('org/categories', { ctx })
 
   return {
     categories: categories.json,

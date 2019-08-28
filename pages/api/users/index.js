@@ -11,7 +11,7 @@ import apiAuth from '../../../lib/api-auth'
 export default async (req, res) => {
   //Gets all Users
   if(req.method === 'GET'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     const results = await query(sql`
@@ -24,8 +24,6 @@ export default async (req, res) => {
       return;
     }
 
-    console.log('got users from db', results)
-
     //Returns the results of the sql query
     res.json(results)
     return
@@ -33,7 +31,7 @@ export default async (req, res) => {
 
   //Sends data to the server
   if(req.method === 'POST'){
-    if(!await apiAuth(req.cookies.user)){
+    if(!await apiAuth(req)){
       return res.status(401).json({})
     }
     const exists = await query(sql`
