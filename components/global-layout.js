@@ -121,6 +121,7 @@ const GlobalStyle = createGlobalStyle`
   @media screen and (min-width: 800px){
     body{
         background-color: #F9F9F9;
+        overflow: hidden;
     }
     .discoverClosed{
       top: calc(100% - 90px);
@@ -130,6 +131,13 @@ const GlobalStyle = createGlobalStyle`
     }
     .discoverOpen{
       top: 140px;
+    }
+    /*Leaflet map styles*/
+    .leaflet-container{
+      left: -8px!important;
+      z-index: -1;
+      width: 100vw;
+      top: 0px;
     }
   }
 
@@ -143,7 +151,9 @@ const GlobalStyle = createGlobalStyle`
     .discoverOpen{
       top: 160px;
     }
+
   }
+
 `
 
 const GlobalLayout = ({ children }) => {

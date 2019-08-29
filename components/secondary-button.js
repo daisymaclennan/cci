@@ -15,6 +15,7 @@ const SecondaryButton = styled.a`
     justify-content: center;
     align-items: center;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
     svg{
       stroke: #52565F;
       margin-right: 10px;
