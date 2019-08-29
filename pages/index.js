@@ -1,26 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Layout from '../components/layout'
 import DiscoverOverlay from '../components/discover-overlay'
 import api from '../lib/api'
-import { useState } from 'react'
+import useMap from '../lib/use-map'
 import SecondaryButton from '../components/secondary-button'
 import { Formik, Form, Field, FieldArray } from 'formik';
 import IconLink from '../components/icon-link'
 import VerticalToggleButton from '../components/vertical-toggle-button'
 import ParentCategoryFilterButtons from '../components/parent-category-filter-buttons'
-//import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-
-// const LazyMap = React.lazy(() => import('components/org-map.js'));
-
-//const loadMap = import('react-leaflet')
-
-// const { Map, TileLayer, Marker, Popup } = await LoadMap()
-
-
 
 const Page = ({ categories }) => {
   const [ discoverOpen, setDiscoverOpen ] = useState("closed")
+  const map = useMap()
 
   //Sets the value of visibilityClass based on the state of discoverOpen
   let visibilityClass
@@ -60,14 +52,14 @@ const Page = ({ categories }) => {
         View map as list
       </SecondaryButton>
 
-      {/*process.browser && (
-        <Map center={position} zoom={this.state.zoom}>
-          <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      {map && (
+        <map.Map center={[ 51.505, -0.09 ]} zoom={13} style={{ height: '100vh' }}>
+          <map.TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        </Map>
-      )*/}
+        </map.Map>
+      )}
 
       <DiscoverOverlay className={`${visibilityClass}`}>
         <VerticalToggleButton
