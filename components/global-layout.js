@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 600;
   }
   body {
-
+    overflow: hidden;
     font-family: 'Blinker', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   h2{
@@ -81,6 +81,12 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 40px;
   }
 
+  /*Leaflet map style*/
+  .leaflet-container{
+    height: 100vh;
+    z-index: 0;
+  }
+
   @media screen and (max-width: 999px){
     .search-blip{
       position: absolute;
@@ -134,8 +140,7 @@ const GlobalStyle = createGlobalStyle`
     }
     /*Leaflet map styles*/
     .leaflet-container{
-      left: -8px!important;
-      z-index: -1;
+      left: -8px;
       width: 100vw;
       top: 0px;
     }
@@ -152,6 +157,13 @@ const GlobalStyle = createGlobalStyle`
       top: 160px;
     }
 
+    /*Leaflet map styles*/
+    .leaflet-container{
+      left: -10px;
+
+      width: 100vw;
+      top: -10px;
+    }
   }
 
 `

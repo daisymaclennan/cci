@@ -25,8 +25,6 @@ const PrimaryButton = styled.a`
       left: calc(50% - 100px)
     }
 
-  }
-
 `
 
 

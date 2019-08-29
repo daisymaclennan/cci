@@ -51,6 +51,10 @@ const OrgDetailBox = styled.div`
       top: 20px;
       left: 0;
     }
+    p{
+      font-size: 12px;
+      line-height: 12px;
+    }
   }
 
 `

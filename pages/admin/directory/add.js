@@ -3,6 +3,7 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import api from '../../../lib/api'
 import AdminLayout from '../../../components/admin-layout'
 import AdminContentSection from '../../../components/admin-content-section'
+import AlgoliaPlaces from 'algolia-places-react'
 
 const Page = ({ cats }) => (
   <AdminLayout>
@@ -102,6 +103,37 @@ const Page = ({ cats }) => (
                   </form>
                 )}
               />
+
+              <AlgoliaPlaces
+                  placeholder='Start typing your address...'
+
+                  options={{
+                    appId: 'plUG20TR7CRB',
+                    apiKey: 'ee74e6f7e24ca1583c2f126b713e11f4',
+                    language: 'en',
+                    countries: ['GB'],
+                    type: 'address',
+                    // Other options from https://community.algolia.com/places/documentation.html#options
+                  }}
+
+                  onChange={({ query, rawAnswer, suggestion, suggestionIndex }) =>
+                    console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
+
+                  onSuggestions={({ rawAnswer, query, suggestions }) =>
+                    console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
+
+                  onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) =>
+                    console.log('Fired when arrows keys are used to navigate suggestions.')}
+
+                  onClear={() =>
+                    console.log('Fired when the input is cleared.')}
+
+                  onLimit={({ message }) =>
+                    console.log('Fired when you reached your current rate limit.')}
+
+                  onError={({ message }) =>
+                    console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+                />
         </AdminContentSection>
       </AdminLayout>
 )

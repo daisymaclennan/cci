@@ -37,6 +37,7 @@ const Page = ( {cats} ) => (
                     </option>
                   ))}
                   </Field>
+                  <Field type="color" name="color"/>
                 </div>
                 <button type="submit">Add Category</button>
               </form>

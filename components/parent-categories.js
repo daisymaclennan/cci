@@ -25,6 +25,7 @@ const ParentCategories = ({ categories}) => {
         <OrgCategoryHorizontal key={category.category_id}>
             <Link href={`/directory?cat=${category.category_id}`}>
               <a>
+                {/*Need to change image to use the icon button component*/}
                 <img src={`/static/img/cat_icon/${category.icon_filename}`}/>
                 <h3 className="org_category">{category.category_name}</h3>
                 <svg className="arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">

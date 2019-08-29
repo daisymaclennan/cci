@@ -9,8 +9,10 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import IconLink from '../components/icon-link'
 import VerticalToggleButton from '../components/vertical-toggle-button'
 import ParentCategoryFilterButtons from '../components/parent-category-filter-buttons'
+import Org from '../components/org'
+import PopUpStyle from '../components/pop-up-style'
 
-const Page = ({ categories }) => {
+const Page = ({ categories, orgs }) => {
   const [ discoverOpen, setDiscoverOpen ] = useState("closed")
   const map = useMap()
 
@@ -41,7 +43,7 @@ const Page = ({ categories }) => {
     ? DiscoverOpen
     : DiscoverHalfway
 
-  //const position = [this.state.lat, this.state.lng]
+
 
   return(
     <Layout>
@@ -53,11 +55,26 @@ const Page = ({ categories }) => {
       </SecondaryButton>
 
       {map && (
-        <map.Map center={[ 51.505, -0.09 ]} zoom={13} style={{ height: '100vh' }}>
+        <map.Map center={[ 50.80767,  -1.071854 ]}
+                 zoom={12.5}
+                 minZoom={12.5}
+                 zoomControl={false}
+                 >
           <map.TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          {orgs.map(org => (
+            <map.Marker position={[org.latitude, org.longitude]}>
+              <map.Popup closeButton={0}
+                         minWidth='400px'
+                         >
+                <PopUpStyle>
+                  <Org org={org}/>
+                </PopUpStyle>
+              </map.Popup>
+            </map.Marker>
+          ))}
         </map.Map>
       )}
 
@@ -185,8 +202,11 @@ const DiscoverOpen = ({categories, setDiscoverOpen}) => {
 Page.getInitialProps = async ctx => {
   const categories = await api('org/categories', { ctx })
 
+  const orgs = await api('org', { ctx })
+
   return {
     categories: categories.json,
+    orgs: orgs.json
   }
 }
 

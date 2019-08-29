@@ -5,6 +5,7 @@ import api from '../../lib/api'
 import Router from 'next/router'
 import { useCookies } from 'react-cookie'
 import Layout from '../../components/layout'
+import Link from 'next/link'
 
 
 const Page = () => {
@@ -41,8 +42,13 @@ const Page = () => {
                 <button type="submit">Log in</button>
               </form>
             )}
-          />
-        </Layout>
+      />
+      <Link href="/login/forgot-password">
+        <a>
+          Forgotten your password?
+        </a>
+      </Link>
+    </Layout>
 )}
 
 export default Page

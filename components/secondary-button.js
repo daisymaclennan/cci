@@ -14,8 +14,8 @@ const SecondaryButton = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    border: 1px solid #EEEEEE;
+    z-index: 2;
     svg{
       stroke: #52565F;
       margin-right: 10px;
