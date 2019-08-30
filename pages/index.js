@@ -12,6 +12,7 @@ import ParentCategoryFilterButtons from '../components/parent-category-filter-bu
 import Org from '../components/org'
 import PopUpStyle from '../components/pop-up-style'
 import Map from 'pigeon-maps'
+import Marker from '../components/marker'
 
 
 const Page = ({ categories, orgs }) => {
@@ -56,16 +57,25 @@ const Page = ({ categories, orgs }) => {
         View map as list
       </SecondaryButton>
 
-      <Map center={[ 50.80767,  -1.071854 ]}
-           zoom={12.5}
-           width={'100vw'}
-           height={'100vh'}
-           provider={(x, y, z) => {
-             const s = String.fromCharCode(97 + (x + y + z) % 3)
-             return `https://${s}.tile.openstreetmap.org/${z}/${x}/${y}.png`
-           }}
+      <div
+        css={`
+          height: 100vh;
+          width: 100vw;
+        `}
+        className="leaflet-container"
       >
-      </Map>
+        <Map center={[ 50.80767,  -1.071854 ]}
+             zoom={12.5}
+             provider={(x, y, z) => {
+               const s = String.fromCharCode(97 + (x + y + z) % 3)
+               return `https://${s}.tile.openstreetmap.org/${z}/${x}/${y}.png`
+             }}
+        >
+          {orgs.map(org => (
+            <Marker anchor={[org.latitude, org.longitude]}></Marker>
+          ))}
+        </Map>
+      </div>
 
       {/*map && (
         <map.Map center={[ 50.80767,  -1.071854 ]}

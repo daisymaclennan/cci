@@ -85,6 +85,10 @@ const GlobalStyle = createGlobalStyle`
   .leaflet-container{
     height: 100vh;
     z-index: 0;
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    position: absolute;
   }
 
   @media screen and (max-width: 999px){
@@ -140,8 +144,6 @@ const GlobalStyle = createGlobalStyle`
     }
     /*Leaflet map styles*/
     .leaflet-container{
-      left: -8px;
-      width: 100vw;
       top: 0px;
     }
   }
@@ -159,9 +161,6 @@ const GlobalStyle = createGlobalStyle`
 
     /*Leaflet map styles*/
     .leaflet-container{
-      left: -10px;
-
-      width: 100vw;
       top: -10px;
     }
   }
