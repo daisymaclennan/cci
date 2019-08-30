@@ -11,10 +11,12 @@ import VerticalToggleButton from '../components/vertical-toggle-button'
 import ParentCategoryFilterButtons from '../components/parent-category-filter-buttons'
 import Org from '../components/org'
 import PopUpStyle from '../components/pop-up-style'
+import Map from 'pigeon-maps'
+
 
 const Page = ({ categories, orgs }) => {
   const [ discoverOpen, setDiscoverOpen ] = useState("closed")
-  const map = useMap()
+  //const map = useMap()
 
   //Sets the value of visibilityClass based on the state of discoverOpen
   let visibilityClass
@@ -54,7 +56,18 @@ const Page = ({ categories, orgs }) => {
         View map as list
       </SecondaryButton>
 
-      {map && (
+      <Map center={[ 50.80767,  -1.071854 ]}
+           zoom={12.5}
+           width={'100vw'}
+           height={'100vh'}
+           provider={(x, y, z) => {
+             const s = String.fromCharCode(97 + (x + y + z) % 3)
+             return `https://${s}.tile.openstreetmap.org/${z}/${x}/${y}.png`
+           }}
+      >
+      </Map>
+
+      {/*map && (
         <map.Map center={[ 50.80767,  -1.071854 ]}
                  zoom={12.5}
                  minZoom={12.5}
@@ -76,7 +89,7 @@ const Page = ({ categories, orgs }) => {
             </map.Marker>
           ))}
         </map.Map>
-      )}
+      )*/}
 
       <DiscoverOverlay className={`${visibilityClass}`}>
         <VerticalToggleButton
